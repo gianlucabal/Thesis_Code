@@ -1,0 +1,398 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<?xml-stylesheet type="text/xsl" href="nxdlformat.xsl"?>
+<!--
+# NeXus - Neutron and X-ray Common Data Format
+#
+# Copyright (C) 2022-2025 NeXus International Advisory Committee (NIAC)
+#
+# This library is free software; you can redistribute it and/or
+# modify it under the terms of the GNU Lesser General Public
+# License as published by the Free Software Foundation; either
+# version 3 of the License, or (at your option) any later version.
+#
+# This library is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public
+# License along with this library; if not, write to the Free Software
+# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#
+# For further information, see http://www.nexusformat.org
+-->
+<definition xmlns="http://definition.nexusformat.org/nxdl/3.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" category="application" type="group" name="NXem" extends="NXobject" xsi:schemaLocation="http://definition.nexusformat.org/nxdl/3.1 ../nxdl.xsd">
+    <doc>
+        Application definition for normalized representation of electron microscopy research.
+        
+        This application definition is a comprehensive example for a general description
+        with which to normalize specific (meta)data collected from the research field
+        of electron microscopy
+        
+        NXem is designed to be used for documenting experiments or computer simulations in which
+        controlled electron beams are used for studying electron-beam matter interaction to explore
+        physical mechanisms and phenomena or to characterize materials with an electron microscope.
+    </doc>
+    <!--docstrings should be organize as such a list of blocks:
+-| req: first part, concept definition, human-readable but such that one could take as is to define an concept in OWL
+-| opt: second part, comment, i.e. information that in an ideal world would be ideal if represented strongly semantic
+but for practical purposes currently is interpretable only by human to provide them further contextualization
+-| recommended: xref part ideally also as a list of triple (spec, term, url to uri)-->
+    <group type="NXentry" minOccurs="1" maxOccurs="unbounded">
+        <field name="definition" type="NX_CHAR">
+            <enumeration>
+                <item value="NXem"/>
+            </enumeration>
+        </field>
+        <group name="profiling" type="NXcs_profiling" optional="true">
+            <doc>
+                The configuration of the software that was used to generate this NeXus file.
+            </doc>
+            <group type="NXprogram" minOccurs="0" maxOccurs="unbounded">
+                <doc>
+                    A collection of all programs and libraries that are considered as relevant
+                    to understand with which software tools this NeXus file instance was
+                    generated. Ideally, to enable a binary recreation from the input data.
+                    
+                    Examples include the name and version of the libraries used to write the
+                    instance. Ideally, the software which writes these NXprogram instances
+                    also includes the version of the set of NeXus classes i.e. the specific set
+                    of base classes, application definitions, and contributed definitions
+                    with which the here described concepts can be resolved.
+                    
+                    For the `pynxtools library &lt;https://github.com/FAIRmat-NFDI/pynxtools&gt;`_
+                    which is used by the `NOMAD &lt;https://nomad-lab.eu/nomad-lab&gt;`_
+                    research data management system, it makes sense to store e.g. the GitHub
+                    repository commit and respective submodule references used.
+                    
+                    Instances can also be used to document the modules and libraries that
+                    are offered by the computational environment such as those parsed
+                    from conda or python virtualenv environments.
+                </doc>
+                <field name="program" type="NX_CHAR">
+                    <attribute name="version" type="NX_CHAR"/>
+                </field>
+            </group>
+        </group>
+        <field name="experiment_alias" type="NX_CHAR" optional="true">
+            <doc>
+                Alias (short name) which scientists can use to refer to this experiment.
+            </doc>
+        </field>
+        <field name="experiment_description" type="NX_CHAR" optional="true">
+            <doc>
+                Free-text description about the experiment.
+                
+                Users are strongly advised to parameterize the description of their experiment
+                by using respective groups and fields and base classes instead of writing prose
+                into the field. The reason is that such free-text field is difficult to machine-interpret.
+                The motivation behind keeping this field for now is to learn in how far the
+                current base classes need extension based on user feedback.
+            </doc>
+        </field>
+        <field name="start_time" type="NX_DATE_TIME">
+            <doc>
+                ISO 8601 time code with local time zone offset to UTC information included
+                when the microscope session started. If the application demands that time
+                codes in this section of the application definition should only be used
+                for specifying when the experiment was performed - and the exact
+                duration is not relevant - use this start_time field.
+                
+                Often though it is useful to specify a time interval via setting both a start_time
+                and an end_time because this enables software tools and users to collect a
+                more detailed bookkeeping of the experiment.
+                
+                Users should be aware though that even using only start_time and end_time
+                may not be sufficient to infer how long the experiment took or for how long
+                data were acquired. To bookkeep more fine-grained timestamps over the
+                course of the experiment is possible with start_time and end_time fields
+                of respective :ref:`NXevent_data_em` instances.
+            </doc>
+        </field>
+        <field name="end_time" type="NX_DATE_TIME" recommended="true">
+            <doc>
+                ISO 8601 time code with local time zone offset to UTC included when
+                the microscope session ended.
+                
+                See docstring of the start_time field to see how to use the
+                start_time and end_time together.
+            </doc>
+        </field>
+        <group type="NXuser" minOccurs="0" maxOccurs="unbounded">
+            <doc>
+                Information about persons who performed or were involved in the microscope
+                session or simulation run.
+                
+                Examples could be to put here the principle investigator who performed this
+                experiment or students who performed simulations to name but a few.
+                Adding multiple users if relevant is recommended.
+                
+                The protection of personal data by laws is in different stages of development
+                and strictness. Therefore, the existence of user data has not been made
+                required.
+                
+                Instances should use user as a name prefix.
+            </doc>
+            <field name="identifierNAME" type="NX_CHAR" nameType="partial" recommended="true">
+                <attribute name="type" type="NX_CHAR"/>
+            </field>
+            <field name="name" type="NX_CHAR" optional="true">
+                <doc>
+                    Given (first) name and surname.
+                </doc>
+            </field>
+            <field name="affiliation" type="NX_CHAR" optional="true">
+                <doc>
+                    Name of the affiliation at the point in time when the experiment was performed.
+                </doc>
+            </field>
+            <field name="address" type="NX_CHAR" optional="true">
+                <doc>
+                    Postal address of the affiliation.
+                </doc>
+            </field>
+            <field name="email" type="NX_CHAR" optional="true">
+                <doc>
+                    Email address at the point in time when the experiment was performed.
+                    
+                    Writing the most permanently used email is recommended.
+                </doc>
+            </field>
+            <field name="telephone_number" type="NX_CHAR" optional="true">
+                <doc>
+                    Telephone number at the point in time when the experiment was performed.
+                </doc>
+            </field>
+            <field name="role" type="NX_CHAR" optional="true">
+                <doc>
+                    User role at the point in time when the experiment was performed.
+                    
+                    Examples are technician operating the microscope, student, postdoc,
+                    principle investigator, or guest.
+                </doc>
+            </field>
+        </group>
+        <group name="SAMPLE" type="NXsample" minOccurs="1" maxOccurs="unbounded" nameType="any">
+            <doc>
+                A physical entity which contains material intended to be investigated.
+                Sample and specimen are treated as de facto synonyms.
+                Samples can be real or virtual ones as annotated via is_simulation.
+                
+                The suggested best practice is to call this group sample. In those cases when
+                multiple samples need to be grouped inside one entry, these SAMPLE groups
+                should be named using the prefix sample followed an index starting from 1, i.e.
+                (sample1, sample2).
+                
+                There are at least two strategies how to store (meta)data when one analyzes multiple
+                samples - not different ROIs on a single sample though - in one session.
+                
+                One strategy is to store each sample and its results under an own NXem/ENTRY.
+                This is one of the most frequent use cases as during most sessions typically only a
+                single sample is investigated. In this case the name of this group should be NXem/ENTRY/sample.
+                
+                If multiple samples are investigated storing each of them in an own ENTRY group eventually will
+                demand an unnecessary duplication though of many details about the instrument.
+                
+                This can be avoided by using another strategy how to store all samples and their results.
+                Namely, by using only one instance of NXem/ENTRY. That NXem/ENTRY should then be named,
+                like in the previous case, NXem/entry1 and the samples should be named sample1, sample2, etc.,
+                i.e. instances should use sample as a name prefix.
+                
+                In this case though the collection of events demands to use identifier_sample to state clearly
+                for which of the samples loaded the (characterization) event was detected.
+                
+                This concept is related to term `Specimen`_ of the EMglossary standard.
+                
+                .. _Specimen: https://purls.helmholtz-metadaten.de/emg/EMG_00000046
+            </doc>
+            <field name="is_simulation" type="NX_BOOLEAN">
+                <doc>
+                    Qualifier whether the sample is a real (in which case is_simulation should be set to false)
+                    or a virtual one (in which case is_simulation should be set to true).
+                </doc>
+            </field>
+            <field name="physical_form" recommended="true">
+                <enumeration open="true">
+                    <item value="bulk"/>
+                    <item value="foil"/>
+                    <item value="thin_film"/>
+                    <item value="powder"/>
+                </enumeration>
+            </field>
+            <field name="identifier_sample" type="NX_CHAR" recommended="true">
+                <doc>
+                    Ideally, (globally) unique persistent identifier which distinguishes this sample from all others
+                    and especially the predecessor/origin from where that sample was cut.  The terms sample
+                    and specimen are here considered as exact synonyms.
+                    
+                    This field must not be used for an alias for the sample! Instead, use name.
+                    
+                    In cases where multiple specimens were loaded into the microscope, the identifier has to resolve
+                    the specific sample, whose results are stored by this :ref:`NXentry` instance because a single
+                    NXentry should be used for the characterization of a single specimen.
+                    
+                    Details about the specimen preparation should be stored in resources referring to identifier_parent.
+                </doc>
+                <attribute name="type" type="NX_CHAR"/>
+            </field>
+            <field name="identifier_parent" type="NX_CHAR" recommended="true">
+                <doc>
+                    Identifier of the sample from which the sample was cut or the string *None*,
+                    i.e. the parent to this sample.
+                    
+                    The purpose of this field is to support functionalities for tracking
+                    sample provenance in a research data management system.
+                </doc>
+                <attribute name="type" type="NX_CHAR"/>
+            </field>
+            <field name="preparation_date" type="NX_DATE_TIME">
+                <doc>
+                    ISO 8601 time code with local time zone offset to UTC information
+                    when the specimen was prepared.
+                    
+                    Ideally, report the end of the preparation, i.e. the last known timestamp when
+                    the measured specimen surface was actively prepared. Ideally, this matches
+                    the last timestamp that is mentioned in the digital resource pointed to by
+                    identifier_parent.
+                    
+                    Knowing when the specimen was exposed to e.g. specific atmosphere is especially
+                    required for material that is sensitive to the environment such as specimens that were
+                    charged with fast diffusing elements or short-lived radioactive tracers.
+                    
+                    Additional time stamps prior to preparation_date should better be placed in resources
+                    which describe but do not pollute the description here with prose. Resolving these
+                    connected metadata is considered as within the responsibility of the
+                    research data management system and not the a NeXus file.
+                </doc>
+            </field>
+            <field name="name" type="NX_CHAR" recommended="true">
+                <doc>
+                    An alias used to refer to the specimen to please readability for humans.
+                </doc>
+            </field>
+            <field name="atom_types" type="NX_CHAR">
+                <doc>
+                    List of comma-separated elements from the periodic table that are contained in the sample.
+                    If the sample substance has multiple components, all elements from each component
+                    must be included in atom_types.
+                    
+                    The purpose of the field is to offer research data management systems an opportunity
+                    to parse the relevant elements without having to interpret these from the resources
+                    pointed to by identifier_parent or walk through eventually deeply nested groups in
+                    individual data instances.
+                </doc>
+            </field>
+            <field name="thickness" type="NX_NUMBER" optional="true" units="NX_LENGTH">
+                <doc>
+                    (Measured) sample thickness.
+                    
+                    The information is recorded to qualify if the beam used was likely
+                    able to shine through the specimen. For scanning electron microscopy,
+                    in many cases the specimen is typically thicker than what is
+                    illuminatable by the electron beam.
+                    
+                    In this case the value should be set to the actual thickness of the specimen
+                    viewed for an illumination situation where the nominal surface normal of the
+                    specimen is parallel to the optical axis.
+                </doc>
+            </field>
+            <field name="density" type="NX_NUMBER" optional="true" units="NX_ANY">
+                <doc>
+                    (Measured) density of the specimen.
+                    
+                    For multi-layered specimens this field should only be used to describe
+                    the density of the excited volume. For scanning electron microscopy
+                    the usage of this field is discouraged and instead an instance of a region-of-interest within connection to individual :ref:`NXevent_data_em`
+                    instances can provide a cleaner description of the relevant details
+                    why one may wish to store the density of the specimen.
+                </doc>
+            </field>
+            <field name="description" type="NX_CHAR" optional="true">
+                <doc>
+                    Discouraged free-text field to provide further detail.
+                </doc>
+            </field>
+        </group>
+        <group name="measurement" type="NXobject" optional="true">
+            <!--the choice if a concept filling content in NXfabrication is recommended or optional
+was made such that all for all those components which are typically add-ons in a
+microscope it is more likely that individuals will have bought different third-party tools
+and therefore, for these typically more optional add-ons NXfabrication is recommended
+for others commercial microscopes often come with model-specific predefined parts
+hence using optional is sufficient-->
+            <group name="instrument" type="NXinstrument_em">
+                <field name="name" type="NX_CHAR" recommended="true"/>
+                <field name="location" type="NX_CHAR" recommended="true"/>
+                <field name="type" type="NX_CHAR" recommended="true"/>
+                <group name="fabrication" type="NXfabrication">
+                    <field name="vendor" type="NX_CHAR"/>
+                    <field name="model" type="NX_CHAR"/>
+                    <field name="serial_number" type="NX_CHAR" recommended="true"/>
+                </group>
+                <group type="NXprogram" recommended="true">
+                    <doc>
+                        Details about the control program used for operating the microscope.
+                        
+                        Instances should use control_software as a name prefix.
+                    </doc>
+                    <field name="program" type="NX_CHAR">
+                        <attribute name="version" type="NX_CHAR"/>
+                    </field>
+                </group>
+            </group>
+            <group name="events" type="NXobject" minOccurs="0" maxOccurs="1">
+                <!--an instance must not have an NXevent_data_em_set but if it has one it must not be more than 1 !-->
+                <doc>
+                    This group should be used to store all event-related (meta)data,
+                    which are typically measured datasets like images and spectra.
+                    To avoid that static instrument-related metadata need to be stored
+                    repetitively the NXem application definitions splits the storage of the
+                    dynamic (meta)data that typically change for each image and spectrum
+                    from the static one.
+                </doc>
+                <group type="NXevent_data_em" minOccurs="0" maxOccurs="unbounded">
+                    <doc>
+                        Instances should use event as a name prefix.
+                    </doc>
+                    <field name="start_time" type="NX_DATE_TIME" recommended="true"/>
+                    <field name="end_time" type="NX_DATE_TIME" recommended="true"/>
+                    <field name="identifier_sample" type="NX_CHAR" recommended="true"/>
+                    <!--above field is another example for lacking support to define conditional existence constraints-->
+                    <group type="NXimage" minOccurs="0" maxOccurs="unbounded">
+                        <doc>
+                            Instances should use image as a name prefix.
+                            Each NXimage instance must use only one image or stack instance.
+                        </doc>
+                        <group type="NXprocess" recommended="true">
+                            <group name="input" type="NXnote" recommended="true">
+                                <field name="type" type="NX_CHAR"/>
+                                <field name="file_name" type="NX_CHAR"/>
+                                <field name="checksum" type="NX_CHAR"/>
+                                <field name="algorithm" type="NX_CHAR"/>
+                                <field name="context" type="NX_CHAR"/>
+                            </group>
+                            <field name="identifier_detector" type="NX_CHAR"/>
+                        </group>
+                        <group name="image_2d" type="NXdata" optional="true">
+                            <attribute name="signal" type="NX_CHAR"/>
+                            <attribute name="axes" type="NX_CHAR"/>
+                            <attribute name="AXISNAME_indices" type="NX_UINT" nameType="partial"/>
+                            <field name="title" type="NX_CHAR" recommended="true"/>
+                            <field name="real" type="NX_NUMBER">
+                                <attribute name="long_name" type="NX_CHAR"/>
+                            </field>
+                            <field name="axis_j" type="NX_NUMBER">
+                                <attribute name="long_name" type="NX_CHAR"/>
+                            </field>
+                            <field name="axis_i" type="NX_NUMBER">
+                                <attribute name="long_name" type="NX_CHAR"/>
+                            </field>
+                        </group>
+                    </group>
+                </group>
+            </group>
+        </group>
+    </group>
+    <!--see an example how to map e.g. the following flat schema https://www.zenodo.org/record/6513745 to NXem
+in https://github.com/FAIRmat-NFDI/nexus_definitions/commit/0b928c4352bc5636f673b5fb25ce990f1af8a099-->
+</definition>

@@ -1,0 +1,314 @@
+[
+    {
+        "path": "/field:definition",
+        "name": "definition",
+        "type": "NX_XML",
+        "value": "NXem"
+    },
+    {
+        "path": "/group:NXentry/field:definition",
+        "name": "definition",
+        "type": "NX_CHAR",
+        "value": "NXem"
+    },
+    {
+        "path": "/group:NXentry/group:profiling/group:NXprogram/field:program",
+        "name": "program",
+        "type": "NX_CHAR",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:profiling/group:NXprogram/field:program/attribute:version",
+        "name": "version",
+        "type": "NX_CHAR",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/field:experiment_alias",
+        "name": "experiment_alias",
+        "type": "NX_CHAR",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/field:experiment_description",
+        "name": "experiment_description",
+        "type": "NX_CHAR",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/field:start_time",
+        "name": "start_time",
+        "type": "NX_DATE_TIME",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/field:end_time",
+        "name": "end_time",
+        "type": "NX_DATE_TIME",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:NXuser/field:identifierNAME",
+        "name": "identifierNAME",
+        "type": "NX_CHAR",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:NXuser/field:identifierNAME/attribute:type",
+        "name": "type",
+        "type": "NX_CHAR",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:NXuser/field:name",
+        "name": "name",
+        "type": "NX_CHAR",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:NXuser/field:affiliation",
+        "name": "affiliation",
+        "type": "NX_CHAR",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:NXuser/field:address",
+        "name": "address",
+        "type": "NX_CHAR",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:NXuser/field:email",
+        "name": "email",
+        "type": "NX_CHAR",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:NXuser/field:telephone_number",
+        "name": "telephone_number",
+        "type": "NX_CHAR",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:NXuser/field:role",
+        "name": "role",
+        "type": "NX_CHAR",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:SAMPLE/field:is_simulation",
+        "name": "is_simulation",
+        "type": "NX_BOOLEAN",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:SAMPLE/field:physical_form",
+        "name": "physical_form",
+        "type": null,
+        "value": "bulk"
+    },
+    {
+        "path": "/group:NXentry/group:SAMPLE/field:identifier_sample",
+        "name": "identifier_sample",
+        "type": "NX_CHAR",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:SAMPLE/field:identifier_sample/attribute:type",
+        "name": "type",
+        "type": "NX_CHAR",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:SAMPLE/field:identifier_parent",
+        "name": "identifier_parent",
+        "type": "NX_CHAR",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:SAMPLE/field:identifier_parent/attribute:type",
+        "name": "type",
+        "type": "NX_CHAR",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:SAMPLE/field:preparation_date",
+        "name": "preparation_date",
+        "type": "NX_DATE_TIME",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:SAMPLE/field:name",
+        "name": "name",
+        "type": "NX_CHAR",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:SAMPLE/field:atom_types",
+        "name": "atom_types",
+        "type": "NX_CHAR",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:SAMPLE/field:thickness",
+        "name": "thickness",
+        "type": "NX_NUMBER",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:SAMPLE/field:density",
+        "name": "density",
+        "type": "NX_NUMBER",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:SAMPLE/field:description",
+        "name": "description",
+        "type": "NX_CHAR",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:measurement/group:instrument/field:name",
+        "name": "name",
+        "type": "NX_CHAR",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:measurement/group:instrument/field:location",
+        "name": "location",
+        "type": "NX_CHAR",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:measurement/group:instrument/field:type",
+        "name": "type",
+        "type": "NX_CHAR",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:measurement/group:instrument/group:fabrication/field:vendor",
+        "name": "vendor",
+        "type": "NX_CHAR",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:measurement/group:instrument/group:fabrication/field:model",
+        "name": "model",
+        "type": "NX_CHAR",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:measurement/group:instrument/group:fabrication/field:serial_number",
+        "name": "serial_number",
+        "type": "NX_CHAR",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:measurement/group:instrument/group:NXprogram/field:program",
+        "name": "program",
+        "type": "NX_CHAR",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:measurement/group:instrument/group:NXprogram/field:program/attribute:version",
+        "name": "version",
+        "type": "NX_CHAR",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:measurement/group:events/group:NXevent_data_em/field:start_time",
+        "name": "start_time",
+        "type": "NX_DATE_TIME",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:measurement/group:events/group:NXevent_data_em/field:end_time",
+        "name": "end_time",
+        "type": "NX_DATE_TIME",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:measurement/group:events/group:NXevent_data_em/field:identifier_sample",
+        "name": "identifier_sample",
+        "type": "NX_CHAR",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:measurement/group:events/group:NXevent_data_em/group:NXimage/group:NXprocess/group:input/field:type",
+        "name": "type",
+        "type": "NX_CHAR",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:measurement/group:events/group:NXevent_data_em/group:NXimage/group:NXprocess/group:input/field:file_name",
+        "name": "file_name",
+        "type": "NX_CHAR",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:measurement/group:events/group:NXevent_data_em/group:NXimage/group:NXprocess/group:input/field:checksum",
+        "name": "checksum",
+        "type": "NX_CHAR",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:measurement/group:events/group:NXevent_data_em/group:NXimage/group:NXprocess/group:input/field:algorithm",
+        "name": "algorithm",
+        "type": "NX_CHAR",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:measurement/group:events/group:NXevent_data_em/group:NXimage/group:NXprocess/group:input/field:context",
+        "name": "context",
+        "type": "NX_CHAR",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:measurement/group:events/group:NXevent_data_em/group:NXimage/group:NXprocess/field:identifier_detector",
+        "name": "identifier_detector",
+        "type": "NX_CHAR",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:measurement/group:events/group:NXevent_data_em/group:NXimage/group:image_2d/field:title",
+        "name": "title",
+        "type": "NX_CHAR",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:measurement/group:events/group:NXevent_data_em/group:NXimage/group:image_2d/field:real",
+        "name": "real",
+        "type": "NX_NUMBER",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:measurement/group:events/group:NXevent_data_em/group:NXimage/group:image_2d/field:real/attribute:long_name",
+        "name": "long_name",
+        "type": "NX_CHAR",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:measurement/group:events/group:NXevent_data_em/group:NXimage/group:image_2d/field:axis_j",
+        "name": "axis_j",
+        "type": "NX_NUMBER",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:measurement/group:events/group:NXevent_data_em/group:NXimage/group:image_2d/field:axis_j/attribute:long_name",
+        "name": "long_name",
+        "type": "NX_CHAR",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:measurement/group:events/group:NXevent_data_em/group:NXimage/group:image_2d/field:axis_i",
+        "name": "axis_i",
+        "type": "NX_NUMBER",
+        "value": null
+    },
+    {
+        "path": "/group:NXentry/group:measurement/group:events/group:NXevent_data_em/group:NXimage/group:image_2d/field:axis_i/attribute:long_name",
+        "name": "long_name",
+        "type": "NX_CHAR",
+        "value": null
+    }
+]
