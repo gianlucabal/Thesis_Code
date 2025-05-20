@@ -21,35 +21,59 @@ def print_dictionary(dizionario):
         else:
             print(f"{chiave}: {valore}")
 
-def metadata_extractor_tiff(tiff_path):
+import numpy as np
+from datetime import datetime
+import tifffile
+import json
+
+def metadata_extractor_tiff(tiff_path, save=False):
     """Extracts metadata from a TIFF file and returns it as a dictionary."""
     metadata = {}
 
-    with tifffile.TiffFile(tiff_path) as tif:
-        page = tif.pages[0]  # Consider only the first page for simplicity
-        for tag in page.tags.values():
-            tag_name = tag.name
-            tag_value = tag.value
+    try:
+        with tifffile.TiffFile(tiff_path) as tif:
+            page = tif.pages[0]
+            for tag in page.tags.values():
+                tag_name = tag.name
+                tag_value = tag.value
 
-            # Handle type conversions
-            if isinstance(tag_value, datetime):
-                tag_value = tag_value.isoformat()
-            elif isinstance(tag_value, np.ndarray):
-                tag_value = tag_value.tolist()
-            elif isinstance(tag_value, bytes):
-                try:
-                    tag_value = tag_value.decode(errors='replace')  # tenta di decodificare
-                except Exception:
-                    tag_value = tag_value.hex()
-            elif isinstance(tag_value, dict):
-                # Flatten inner dictionary into flat metadata structure
-                for key, value in tag_value.items():
-                    metadata[f"{value[0]}"] = value[1:]
-                continue  # salta inserimento diretto
+                if isinstance(tag_value, datetime):
+                    tag_value = tag_value.isoformat()
+                elif isinstance(tag_value, np.ndarray):
+                    tag_value = tag_value.tolist()
+                elif isinstance(tag_value, bytes):
+                    try:
+                        tag_value = tag_value.decode(errors='replace')
+                    except Exception:
+                        tag_value = tag_value.hex()
+                elif isinstance(tag_value, dict):
+                    for key, value in tag_value.items():
+                        if isinstance(value, (tuple, list)) and len(value) > 1:
+                            metadata[f"{key}_{value[0]}"] = value[1]
+                        else:
+                            metadata[str(key)] = str(value)
+                    continue
 
-            metadata[tag_name] = tag_value
+                metadata[tag_name] = tag_value
+    except Exception as e:
+        print(f"❌ Error extracting metadata from {tiff_path}: {e}")
+    if save:
+
+        # Save metadata to a JSON file
+        base_name = os.path.splitext(tiff_path)[0]
+        output_path = base_name + "_metadata.txt"
+        try:
+            with open(output_path, "w", encoding="utf-8") as f:
+                for key, value in metadata.items():
+                    f.write(f"{key}: {value}\n")
+            print(f"✅ Metadata saved to {output_path}")
+        except Exception as e:
+            print(f"❌ Error saving metadata to TXT: {e}")
 
     return metadata
+
+
+
 
 
 def extract_fields(element, path=""):
